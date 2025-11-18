@@ -3,9 +3,12 @@
  */
 
 #include <cassert>
+#include <cmath>
 #include <cstddef>
 #include <iostream>
 #include <vector>
+
+#define sigmoid_func(z) (1 / (1 + std::exp(-(z))))
 
 template <typename T>
 bool perceptron(std::vector<T>& xs, std::vector<T>& ws, T bias) 
@@ -20,14 +23,34 @@ bool perceptron(std::vector<T>& xs, std::vector<T>& ws, T bias)
     return sum + bias > 0;
 }
 
+template <typename T>
+T sigmoid_neuron(std::vector<T>& xs, std::vector<T>& ws, T bias) 
+{
+    assert(xs.size() == ws.size());
+    T sum = 0;
+
+    for (std::size_t i = 0; i < xs.size(); i++) {
+        sum += xs[i] * ws[i];
+    }
+
+    return sigmoid_func(sum + bias);
+}
+
 int main() 
 {
     // For now tests go here
 
-    float bias = -1;
-    std::vector<float> xs = {10.940, 20.1209, 1.2032, -126.234};
-    std::vector<float> ws = {1.0000, 10.5000, 11.023,   21.000};
+    int bias = -1;
+    std::vector<int> xs = {10, 2, 1,  -12};
+    std::vector<int> ws = {1,  1, 11,  21};
+
+    float bias2 = 1.234;
+    std::vector<float> xs2 = {112.247, 2.31, 1.98, -102.11};
+    std::vector<float> ws2 = {678.122, 1.24, 1.00,  1.56};
 
     bool is_active = perceptron(xs, ws, bias);
-    std::cout << "Is active: " << is_active << '\n';
+    float coef = sigmoid_neuron(xs2, ws2, bias2);
+
+    std::cout << "(Perceptron) Is active: " << is_active << '\n';
+    std::cout << "(Sigmoid) Coefficient: " << coef << '\n';
 }
