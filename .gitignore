@@ -1,2 +1,5 @@
 *.out
 dist
+/.vs/
+/.idea/
+/out/
