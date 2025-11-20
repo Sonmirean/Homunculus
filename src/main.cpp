@@ -2,10 +2,10 @@
  * For now no project structure, nor purpose, just put things here
  */
 
-#include <cassert>
 #include <cmath>
 #include <cstddef>
 #include <iostream>
+#include <stdexcept>
 #include <vector>
 
 #define sigmoid_func(z) (1 / (1 + std::exp(-(z))))
@@ -13,12 +13,12 @@
 template <typename T>
 bool perceptron(std::vector<T>& xs, std::vector<T>& ws, T bias) 
 {
-    assert(xs.size() == ws.size());// assert is ass, don't use it, specially in frequently called functions.
-    T sum = 0;
+    if (xs.size() != ws.size())
+        throw std::invalid_argument("Xs an weights must have same size");
 
-    for (std::size_t i = 0; i < xs.size(); i++) {
+    T sum = 0;
+    for (std::size_t i = 0; i < xs.size(); i++)
         sum += xs[i] * ws[i];
-    }
 
     return sum + bias > 0;
 }
@@ -26,12 +26,12 @@ bool perceptron(std::vector<T>& xs, std::vector<T>& ws, T bias)
 template <typename T>
 T sigmoid_neuron(std::vector<T>& xs, std::vector<T>& ws, T bias) 
 {
-    assert(xs.size() == ws.size());
-    T sum = 0;
+    if (xs.size() != ws.size())
+        throw std::invalid_argument("Xs an weights must have same size");
 
-    for (std::size_t i = 0; i < xs.size(); i++) {
+    T sum = 0;
+    for (std::size_t i = 0; i < xs.size(); i++)
         sum += xs[i] * ws[i];
-    }
 
     return sigmoid_func(sum + bias);
 }

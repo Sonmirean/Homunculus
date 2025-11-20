@@ -1,4 +1,3 @@
-
 #include "neuron.hpp"
 
 bool Homunculus::perceptron(std::map<bool, float> inputs, long long int id)
