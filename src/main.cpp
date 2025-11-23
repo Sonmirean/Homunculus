@@ -8,12 +8,13 @@
 #include <iostream>
 #include <vector>
 
+// imho constexpr functions are better than macros
 #define sigmoid_func(z) (1 / (1 + std::exp(-(z))))
 
 template <typename T>
 bool perceptron(std::vector<T>& xs, std::vector<T>& ws, T bias) 
 {
-    assert(xs.size() == ws.size());// assert is ass, don't use it, specially in frequently called functions.
+    assert(xs.size() == ws.size());// assert is ass, don't use it, especially in frequently called functions.
     T sum = 0;
 
     for (std::size_t i = 0; i < xs.size(); i++) {

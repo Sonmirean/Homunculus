@@ -8,10 +8,10 @@
 namespace Homunculus
 {
 
-	bool perceptron(std::map<bool, float> inputs, long long int id);
+	bool perceptron(std::map<bool, double> inputs, long long int id);
 
-	float sigmoid(std::map<bool, float> inputs, long long int id);
+	double sigmoid(std::map<bool, double> inputs, long long int id);
 
 	// Get the bias of specified neuron.
-	float bias(long long int id);
+	constexpr double bias(long long int id);
 }
